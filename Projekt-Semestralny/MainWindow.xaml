@@ -6,25 +6,26 @@
         xmlns:local="clr-namespace:ProjektSemestralny"
         xmlns:viewModel="clr-namespace:ProjektSemestralny.MVVM.ViewModel"
         mc:Ignorable="d"
-        WindowStyle="None"
         Height="600" Width="920"
+        WindowStyle="ThreeDBorderWindow"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Background="Transparent"
-        AllowsTransparency="True">
+        ResizeMode="CanMinimize"
+        Title="Player database manager">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+    
 
 
-    <Border Background="#FF4E8DE2"
-            CornerRadius="5">
+    <Border Background="#36393F"
+            BorderThickness="0">
+
 
         <Grid>
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -33,46 +34,107 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Elysian"
+            <!--<TextBlock Text="Elysian"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Foreground="White"
                    FontSize="22"
-                   Margin="20,0,0,0"/>
+                   Margin="20,0,0,0"/>-->
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Home"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
-                <RadioButton Content="Discovery"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding DiscoveryViewCommand}"/>
-                <RadioButton Content="Featured"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>
+            
 
-            <TextBox Width="250"
-                     Height="40"
-                     VerticalAlignment="Center"
-                     HorizontalAlignment="Left"
-                     Margin="5"
-                     Grid.Column="1"
-                     Style="{StaticResource SearchBoxTheme}"/>
+            <!--<ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Hidden"
+                          Background="#2F3136">
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="Home"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 IsChecked="True"
+                                 Command="{Binding HomeViewCommand}"/>
+                    <RadioButton Content="Discovery"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Command="{Binding DiscoveryViewCommand}"/>
+                    <RadioButton Content="Featured"
+                                 Height="50"
+                                 Foreground="White"
+                                 FontSize="14"
+                                 Style="{StaticResource MenuButtonTheme}"/>
+                </StackPanel>
+            </ScrollViewer>-->
 
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10"
-                            Content="{Binding CurrentView}"/>
+
+            <Grid Background="#2F3136" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Width="230"
+                         Height="40"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Margin="5"
+                         Grid.Column="0"
+                         Style="{StaticResource SearchBoxTheme}"/>
+
+                <ListView ItemsSource="{Binding Players}"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Grid.Row="1"
+                          ItemContainerStyle="{StaticResource PlayerListItem}"/>
+                
+            </Grid>
+
+
+            <Label Grid.Column="1"
+                   Content="User 1"
+                   Foreground="White"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontSize="30"
+                   Margin="0,0,0,0"/>
+
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.ColumnSpan="3"
+                       Content="Characters"
+                       Foreground="White"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"
+                       FontSize="26"
+                       Margin="0,0,0,0"/>
+
+                <Label Grid.Column="3"
+                       Content="Friends"
+                       Foreground="White"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"
+                       FontSize="26"
+                       Margin="0,0,0,0"/>
+
+            </Grid>
+            
 
         </Grid>
     </Border>
