@@ -11,16 +11,19 @@ namespace ProjektSemestralny.MVVM.ViewModel
 {
     class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
-        public RelayCommand DiscoveryViewCommand { get; set; }
-
-
-        // Players list
         public ObservableCollection<PlayerModel> Players { get; set; }
 
+        public PlayerModel _selectedPlayer { get; set; }
+        public PlayerModel SelectedPlayer
+        {
+            get => _selectedPlayer;
+            set
+            {
+                _selectedPlayer = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public HomeViewModel HomeVM { get; set; }
-        public DiscoveryViewModel DiscoveryVM { get; set; }
 
 
         private object? _currentView;
@@ -36,27 +39,55 @@ namespace ProjektSemestralny.MVVM.ViewModel
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
-            DiscoveryVM = new DiscoveryViewModel();
-            CurrentView = HomeVM;
-
-            HomeViewCommand = new RelayCommand(o => 
-            {
-                CurrentView = HomeVM;
-            });
-
-            DiscoveryViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = DiscoveryVM;
-            });
-
-
             // Fill up players list with dummy data
             Players = new ObservableCollection<PlayerModel>();
-            for (int i = 1; i < 5; i++)
+            for (int i = 1; i < 15; i++)
             {
-                Players.Add(new PlayerModel() { Username = $"User {i}", Id = (uint)i - 1});
+                var eq = new ObservableCollection<EquipmentModel>();
+                for (int j = 1; j <= 30; j++)
+                {
+                    eq.Add(new EquipmentModel()
+                    {
+                        Name = $"Eq {j}",
+                        Quantity = 3,
+                        Id = (uint)(j*i)
+                    });
+                }
+
+                var char1 = new CharacterModel()
+                {
+                    Name = $"Character {i}1",
+                    Level = 1,
+                    CreationDate = DateTime.Now,
+                    Equipment = eq
+                };
+                var char2 = new CharacterModel()
+                {
+                    Name = $"Character {i}2",
+                    Level = 1,
+                    CreationDate = DateTime.Now,
+                    Equipment = eq
+                };
+                var char3 = new CharacterModel()
+                {
+                    Name = $"Character {i}3",
+                    Level = 1,
+                    CreationDate = DateTime.Now,
+                    Equipment = eq
+                };
+
+
+                Players.Add(new PlayerModel() 
+                { 
+                    Username = $"User {i}",
+                    Id = (uint)i - 1,
+                    Character1 = char1,
+                    Character2 = char2,
+                    Character3 = char3
+                });
             }
+
+            _selectedPlayer = Players[0];
         }
     }
 }

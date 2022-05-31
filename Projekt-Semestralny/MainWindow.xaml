@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSemestralny"
         xmlns:viewModel="clr-namespace:ProjektSemestralny.MVVM.ViewModel"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"  
         mc:Ignorable="d"
         Height="600" Width="920"
         WindowStyle="ThreeDBorderWindow"
@@ -15,7 +16,7 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
-    
+
 
 
     <Border Background="#36393F"
@@ -34,39 +35,6 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <!--<TextBlock Text="Elysian"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Left"
-                   Foreground="White"
-                   FontSize="22"
-                   Margin="20,0,0,0"/>-->
-
-            
-
-            <!--<ScrollViewer Grid.Row="1"
-                          VerticalScrollBarVisibility="Hidden"
-                          Background="#2F3136">
-                <StackPanel Grid.Row="1">
-                    <RadioButton Content="Home"
-                                 Height="50"
-                                 Foreground="White"
-                                 FontSize="14"
-                                 Style="{StaticResource MenuButtonTheme}"
-                                 IsChecked="True"
-                                 Command="{Binding HomeViewCommand}"/>
-                    <RadioButton Content="Discovery"
-                                 Height="50"
-                                 Foreground="White"
-                                 FontSize="14"
-                                 Style="{StaticResource MenuButtonTheme}"
-                                 Command="{Binding DiscoveryViewCommand}"/>
-                    <RadioButton Content="Featured"
-                                 Height="50"
-                                 Foreground="White"
-                                 FontSize="14"
-                                 Style="{StaticResource MenuButtonTheme}"/>
-                </StackPanel>
-            </ScrollViewer>-->
 
 
             <Grid Background="#2F3136" Grid.RowSpan="2">
@@ -84,6 +52,7 @@
                          Style="{StaticResource SearchBoxTheme}"/>
 
                 <ListView ItemsSource="{Binding Players}"
+                          SelectedItem="{Binding SelectedPlayer}"
                           Background="Transparent"
                           BorderThickness="0"
                           Grid.Row="1"
@@ -92,18 +61,24 @@
             </Grid>
 
 
-            <Label Grid.Column="1"
-                   Content="User 1"
-                   Foreground="White"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   FontSize="30"
-                   Margin="0,0,0,0"/>
+            <Grid Grid.Column="1"
+                  Background="#36393F">
+
+                <Border BorderThickness="0,0,0,2"
+                        BorderBrush="#2F3136">
+                    <Label Content="{Binding SelectedPlayer.Username}"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="30"
+                           Margin="0,0,0,0"/>
+                </Border>
+            </Grid>
 
 
             <Grid Grid.Row="1"
                   Grid.Column="1"
-                  Margin="10">
+                  Margin="4">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -114,7 +89,6 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="200"/>
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.ColumnSpan="3"
@@ -122,20 +96,36 @@
                        Foreground="White"
                        VerticalAlignment="Top"
                        HorizontalAlignment="Center"
-                       FontSize="26"
+                       FontSize="21"
                        Margin="0,0,0,0"/>
 
-                <Label Grid.Column="3"
-                       Content="Friends"
-                       Foreground="White"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Center"
-                       FontSize="26"
-                       Margin="0,0,0,0"/>
+
+
+
+                <ListView Grid.Row="1" Grid.Column="0"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            ItemContainerStyle="{StaticResource CharacterTab1}">
+                    <ListViewItem/>
+                </ListView>
+
+                <ListView Grid.Row="1" Grid.Column="1"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            ItemContainerStyle="{StaticResource CharacterTab2}">
+                    <ListViewItem/>
+                </ListView>
+
+                <ListView Grid.Row="1" Grid.Column="2"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            ItemContainerStyle="{StaticResource CharacterTab3}">
+                    <ListViewItem/>
+                </ListView>
+
+
 
             </Grid>
-            
-
         </Grid>
     </Border>
 </Window>

@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ProjektSemestralny.MVVM.Model
 {
-    class PlayerModel
+    class CharacterModel
     {
-        public string? Username { get; set; }
+        public string? Name { get; set; }
+        public int Level { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public uint Id { get; set; }
 
-        public CharacterModel? Character1 { get; set; }
-        public CharacterModel? Character2 { get; set; }
-        public CharacterModel? Character3 { get; set; }
+        public ObservableCollection<EquipmentModel>? Equipment { get; set; }
     }
 }

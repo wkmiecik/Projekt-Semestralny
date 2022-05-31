@@ -16,4 +16,8 @@
     <Resource Include="Images\image.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MVVM\View\" />
+  </ItemGroup>
+
 </Project>
