@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PlayersDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="characters">
+          <Key>
+            <PropertyRef Name="character_id" />
+          </Key>
+          <Property Name="character_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="character_name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="character_level" Type="tinyint" />
+          <Property Name="creation_date" Type="date" />
+          <Property Name="player_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="characters_equipment">
+          <Key>
+            <PropertyRef Name="character_id" />
+            <PropertyRef Name="equipment_id" />
+          </Key>
+          <Property Name="character_id" Type="int" Nullable="false" />
+          <Property Name="equipment_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="equipment_id" />
+          </Key>
+          <Property Name="equipment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="equipment_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="players">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="player_name" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__character__chara__31EC6D26">
+          <End Role="characters" Type="Self.characters" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters_equipment" Type="Self.characters_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="characters">
+              <PropertyRef Name="character_id" />
+            </Principal>
+            <Dependent Role="characters_equipment">
+              <PropertyRef Name="character_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__character__equip__30F848ED">
+          <End Role="equipment" Type="Self.equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters_equipment" Type="Self.characters_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipment">
+              <PropertyRef Name="equipment_id" />
+            </Principal>
+            <Dependent Role="characters_equipment">
+              <PropertyRef Name="equipment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__character__playe__29572725">
+          <End Role="players" Type="Self.players" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters" Type="Self.characters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="players">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="characters">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlayersDBModelStoreContainer">
+          <EntitySet Name="characters" EntityType="Self.characters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="characters_equipment" EntityType="Self.characters_equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipment" EntityType="Self.equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="players" EntityType="Self.players" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__character__chara__31EC6D26" Association="Self.FK__character__chara__31EC6D26">
+            <End Role="characters" EntitySet="characters" />
+            <End Role="characters_equipment" EntitySet="characters_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__character__equip__30F848ED" Association="Self.FK__character__equip__30F848ED">
+            <End Role="equipment" EntitySet="equipment" />
+            <End Role="characters_equipment" EntitySet="characters_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__character__playe__29572725" Association="Self.FK__character__playe__29572725">
+            <End Role="players" EntitySet="players" />
+            <End Role="characters" EntitySet="characters" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlayersDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="character">
+          <Key>
+            <PropertyRef Name="character_id" />
+          </Key>
+          <Property Name="character_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="character_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="character_level" Type="Byte" />
+          <Property Name="creation_date" Type="DateTime" Precision="0" />
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="characters_equipment" Relationship="Self.FK__character__chara__31EC6D26" FromRole="characters" ToRole="characters_equipment" />
+          <NavigationProperty Name="player" Relationship="Self.FK__character__playe__29572725" FromRole="characters" ToRole="players" />
+        </EntityType>
+        <EntityType Name="characters_equipment">
+          <Key>
+            <PropertyRef Name="character_id" />
+            <PropertyRef Name="equipment_id" />
+          </Key>
+          <Property Name="character_id" Type="Int32" Nullable="false" />
+          <Property Name="equipment_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="character" Relationship="Self.FK__character__chara__31EC6D26" FromRole="characters_equipment" ToRole="characters" />
+          <NavigationProperty Name="equipment" Relationship="Self.FK__character__equip__30F848ED" FromRole="characters_equipment" ToRole="equipment" />
+        </EntityType>
+        <EntityType Name="equipment">
+          <Key>
+            <PropertyRef Name="equipment_id" />
+          </Key>
+          <Property Name="equipment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipment_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="characters_equipment" Relationship="Self.FK__character__equip__30F848ED" FromRole="equipment" ToRole="characters_equipment" />
+        </EntityType>
+        <EntityType Name="player">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="player_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="characters" Relationship="Self.FK__character__playe__29572725" FromRole="players" ToRole="characters" />
+        </EntityType>
+        <Association Name="FK__character__chara__31EC6D26">
+          <End Role="characters" Type="Self.character" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters_equipment" Type="Self.characters_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="characters">
+              <PropertyRef Name="character_id" />
+            </Principal>
+            <Dependent Role="characters_equipment">
+              <PropertyRef Name="character_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__character__playe__29572725">
+          <End Role="players" Type="Self.player" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters" Type="Self.character" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="players">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="characters">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__character__equip__30F848ED">
+          <End Role="equipment" Type="Self.equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="characters_equipment" Type="Self.characters_equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipment">
+              <PropertyRef Name="equipment_id" />
+            </Principal>
+            <Dependent Role="characters_equipment">
+              <PropertyRef Name="equipment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PlayersDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="characters" EntityType="Self.character" />
+          <EntitySet Name="characters_equipment" EntityType="Self.characters_equipment" />
+          <EntitySet Name="equipments" EntityType="Self.equipment" />
+          <EntitySet Name="players" EntityType="Self.player" />
+          <AssociationSet Name="FK__character__chara__31EC6D26" Association="Self.FK__character__chara__31EC6D26">
+            <End Role="characters" EntitySet="characters" />
+            <End Role="characters_equipment" EntitySet="characters_equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__character__playe__29572725" Association="Self.FK__character__playe__29572725">
+            <End Role="players" EntitySet="players" />
+            <End Role="characters" EntitySet="characters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__character__equip__30F848ED" Association="Self.FK__character__equip__30F848ED">
+            <End Role="equipment" EntitySet="equipments" />
+            <End Role="characters_equipment" EntitySet="characters_equipment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlayersDBModelStoreContainer" CdmEntityContainer="PlayersDBEntities">
+          <EntitySetMapping Name="characters">
+            <EntityTypeMapping TypeName="PlayersDBModel.character">
+              <MappingFragment StoreEntitySet="characters">
+                <ScalarProperty Name="character_id" ColumnName="character_id" />
+                <ScalarProperty Name="character_name" ColumnName="character_name" />
+                <ScalarProperty Name="character_level" ColumnName="character_level" />
+                <ScalarProperty Name="creation_date" ColumnName="creation_date" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="characters_equipment">
+            <EntityTypeMapping TypeName="PlayersDBModel.characters_equipment">
+              <MappingFragment StoreEntitySet="characters_equipment">
+                <ScalarProperty Name="character_id" ColumnName="character_id" />
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipments">
+            <EntityTypeMapping TypeName="PlayersDBModel.equipment">
+              <MappingFragment StoreEntitySet="equipment">
+                <ScalarProperty Name="equipment_id" ColumnName="equipment_id" />
+                <ScalarProperty Name="equipment_name" ColumnName="equipment_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players">
+            <EntityTypeMapping TypeName="PlayersDBModel.player">
+              <MappingFragment StoreEntitySet="players">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="player_name" ColumnName="player_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

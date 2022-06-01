@@ -66,7 +66,7 @@
 
                 <Border BorderThickness="0,0,0,2"
                         BorderBrush="#2F3136">
-                    <Label Content="{Binding SelectedPlayer.Username}"
+                    <Label Content="{Binding SelectedPlayer.player_name}"
                            Foreground="White"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"

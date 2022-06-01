@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -101,9 +103,36 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MVVM\Model\character.cs">
+      <DependentUpon>PlayersModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Model\CharacterModel.cs" />
+    <Compile Include="MVVM\Model\characters_equipment.cs">
+      <DependentUpon>PlayersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Model\equipment.cs">
+      <DependentUpon>PlayersModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Model\EquipmentModel.cs" />
+    <Compile Include="MVVM\Model\player.cs">
+      <DependentUpon>PlayersModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\Model\PlayerModel.cs" />
+    <Compile Include="MVVM\Model\PlayersModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayersModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Model\PlayersModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayersModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Model\PlayersModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlayersModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -122,6 +151,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="MVVM\Model\PlayersModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PlayersModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MVVM\Model\PlayersModel.edmx.diagram">
+      <DependentUpon>PlayersModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -136,6 +172,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVVM\View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MVVM\Model\PlayersModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlayersModel.edmx</DependentUpon>
+      <LastGenOutput>PlayersModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MVVM\Model\PlayersModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlayersModel.edmx</DependentUpon>
+      <LastGenOutput>PlayersModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
