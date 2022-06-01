@@ -8,7 +8,7 @@ namespace ProjektSemestralny.MVVM.Model
 {
     class EquipmentModel
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public uint Quantity { get; set; }
         public uint Id { get; set; }
     }

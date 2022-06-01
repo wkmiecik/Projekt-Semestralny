@@ -9,12 +9,12 @@ namespace ProjektSemestralny.MVVM.Model
 {
     class PlayerModel
     {
-        public string? Username { get; set; }
+        public string Username { get; set; }
 
         public uint Id { get; set; }
 
-        public CharacterModel? Character1 { get; set; }
-        public CharacterModel? Character2 { get; set; }
-        public CharacterModel? Character3 { get; set; }
+        public CharacterModel Character1 { get; set; }
+        public CharacterModel Character2 { get; set; }
+        public CharacterModel Character3 { get; set; }
     }
 }

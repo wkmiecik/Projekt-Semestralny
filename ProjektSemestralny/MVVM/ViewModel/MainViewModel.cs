@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,8 +26,8 @@ namespace ProjektSemestralny.MVVM.ViewModel
 
 
 
-        private object? _currentView;
-        public object? CurrentView
+        private object _currentView;
+        public object CurrentView
         {
             get => _currentView;
             set

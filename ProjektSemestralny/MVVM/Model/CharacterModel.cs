@@ -9,12 +9,12 @@ namespace ProjektSemestralny.MVVM.Model
 {
     class CharacterModel
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public int Level { get; set; }
         public DateTime CreationDate { get; set; }
 
         public uint Id { get; set; }
 
-        public ObservableCollection<EquipmentModel>? Equipment { get; set; }
+        public ObservableCollection<EquipmentModel> Equipment { get; set; }
     }
 }
