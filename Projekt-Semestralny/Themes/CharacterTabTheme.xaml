@@ -36,17 +36,23 @@
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="Equipment"
+                            <Border BorderBrush="#36393F"
+                                    BorderThickness="0,3,0,0">
+                                <Label Content="Equipment"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="21"/>
+                            </Border>
 
 
-                            <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
+                            <Grid Height="238">
+                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentList}"/>
+                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                            </Grid>
+
 
 
                         </StackPanel>
@@ -92,17 +98,22 @@
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="Equipment"
+                            <Border BorderBrush="#36393F"
+                                    BorderThickness="0,3,0,0">
+                                <Label Content="Equipment"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="21"/>
+                            </Border>
 
 
-                            <ListView ItemsSource="{Binding SelectedPlayer.Character2.Equipment}"
+                            <Grid Height="238">
+                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentList}"/>
+                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                            </Grid>
 
 
                         </StackPanel>
@@ -149,17 +160,22 @@
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="Equipment"
+                            <Border BorderBrush="#36393F"
+                                    BorderThickness="0,3,0,0">
+                                <Label Content="Equipment"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    FontSize="21"/>
+                            </Border>
 
 
-                            <ListView ItemsSource="{Binding SelectedPlayer.Character3.Equipment}"
+                            <Grid Height="238">
+                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentList}"/>
+                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                            </Grid>
 
 
                         </StackPanel>

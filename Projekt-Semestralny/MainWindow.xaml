@@ -94,11 +94,10 @@
                 <Label Grid.ColumnSpan="3"
                        Content="Characters"
                        Foreground="White"
-                       VerticalAlignment="Top"
+                       VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="21"
                        Margin="0,0,0,0"/>
-
 
 
 

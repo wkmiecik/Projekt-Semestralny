@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,7 +42,8 @@ namespace ProjektSemestralny.MVVM.ViewModel
         {
             // Fill up players list with dummy data
             Players = new ObservableCollection<PlayerModel>();
-            for (int i = 1; i < 15; i++)
+
+            for (int i = 1; i < 1500; i++)
             {
                 var eq = new ObservableCollection<EquipmentModel>();
                 for (int j = 1; j <= 30; j++)
@@ -75,7 +77,6 @@ namespace ProjektSemestralny.MVVM.ViewModel
                     CreationDate = DateTime.Now,
                     Equipment = eq
                 };
-
 
                 Players.Add(new PlayerModel() 
                 { 
