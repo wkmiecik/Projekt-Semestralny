@@ -12,8 +12,6 @@ namespace ProjektSemestralny.MVVM.ViewModel
     class MainViewModel : ObservableObject
     {
         private PlayersDBEntities playersDBEntities;
-
-
         public ObservableCollection<player> Players { get; set; }
         
 
@@ -27,7 +25,6 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
 
 
         public MainViewModel()

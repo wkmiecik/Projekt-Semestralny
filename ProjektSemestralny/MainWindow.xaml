@@ -18,7 +18,6 @@
     </Window.DataContext>
 
 
-
     <Border Background="#36393F"
             BorderThickness="0">
 
@@ -56,7 +55,7 @@
                           Background="Transparent"
                           BorderThickness="0"
                           Grid.Row="1"
-                          ItemContainerStyle="{StaticResource PlayerListItem}"/>
+                          ItemContainerStyle="{StaticResource PlayerListItem}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
                 
             </Grid>
 
