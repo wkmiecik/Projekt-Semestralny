@@ -20,6 +20,10 @@ namespace ProjektSemestralny.MVVM.ViewModel
         public ICommand PlayerEditCommand { get; set; }
         public ICommand PlayerRemoveCommand { get; set; }
         public ICommand PlayerAddCommand { get; set; }
+        
+        public ICommand Character1EditCommand { get; set; }
+        public ICommand Character2EditCommand { get; set; }
+        public ICommand Character3EditCommand { get; set; }
 
 
         private player _selectedPlayer { get; set; }
@@ -43,6 +47,10 @@ namespace ProjektSemestralny.MVVM.ViewModel
             PlayerEditCommand = new RelayCommand(o => PlayerEditClick("MainButton"));
             PlayerRemoveCommand = new RelayCommand(o => PlayerRemoveClick("MainButton"));
             PlayerAddCommand = new RelayCommand(o => PlayerAddClick("MainButton"));
+            
+            Character1EditCommand = new RelayCommand(o => CharacterEditClick(0));
+            Character2EditCommand = new RelayCommand(o => CharacterEditClick(1));
+            Character3EditCommand = new RelayCommand(o => CharacterEditClick(2));
         }
 
         
@@ -119,6 +127,36 @@ namespace ProjektSemestralny.MVVM.ViewModel
                     catch
                     {
                         Players.Remove(newPlayer);
+                        MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+        }
+
+
+        public void CharacterEditClick(int character)
+        {
+            EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
+            if (inputDialog.ShowDialog() == true)
+            {
+                var tempName = SelectedPlayer.player_name;
+
+                SelectedPlayer.player_name = inputDialog.Answer;
+
+                if (playersDBEntities.players.Any(item => item.player_name == SelectedPlayer.player_name))
+                {
+                    SelectedPlayer.player_name = tempName;
+                    MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    try
+                    {
+                        playersDBEntities.SaveChanges();
+                    }
+                    catch
+                    {
+                        SelectedPlayer.player_name = tempName;
                         MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
