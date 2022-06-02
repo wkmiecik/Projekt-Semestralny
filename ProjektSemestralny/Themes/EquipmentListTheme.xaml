@@ -16,19 +16,19 @@
                     <Border Background="{TemplateBinding Background}"
                             Height="35"
                             CornerRadius="4"
-                            Margin="16,2,0,2">
+                            Margin="8,2,8,2">
 
                         <StackPanel Orientation="Horizontal"
                                     Margin="5,0,0,0"
                                     HorizontalAlignment="Center">
 
-                            <Label Content="{Binding Name}"
+                            <Label Content="{Binding equipment.equipment_name}"
                                    Foreground="White"
                                    VerticalAlignment="Top"
                                    FontSize="13"
                                    Margin="0,2,0,0"/>
 
-                            <Label Content="{Binding Quantity}"
+                            <Label Content="{Binding quantity}"
                                    ContentStringFormat="({0})"
                                    Foreground="White"
                                    VerticalAlignment="Top"

@@ -9,47 +9,22 @@
 
 namespace ProjektSemestralny.MVVM.Model
 {
-    using ProjektSemestralny.Core;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
-    public partial class player : ObservableObject
+    public partial class player
     {
-        private int player_id1;
-        private string player_name1;
-        private ICollection<character> characters1;
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public player()
         {
-            this.characters = new HashSet<character>();
+            this.characters = new ObservableCollection<character>();
         }
 
-        public int player_id 
-        { 
-            get => player_id1; 
-            set 
-            { 
-                player_id1 = value; OnPropertyChanged();
-            } 
-        }
-        public string player_name 
-        { 
-            get => player_name1;
-            set
-            {
-                player_name1 = value; OnPropertyChanged();
-            }
-        }
+        public int player_id { get; set; }
+        public string player_name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<character> characters 
-        { 
-            get => characters1; 
-            set
-            {
-                characters1 = value; OnPropertyChanged();
-            }
-        }
+        public virtual ObservableCollection<character> characters { get; set; }
     }
 }

@@ -106,18 +106,15 @@
     <Compile Include="MVVM\Model\character.cs">
       <DependentUpon>PlayersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Model\CharacterModel.cs" />
     <Compile Include="MVVM\Model\characters_equipment.cs">
       <DependentUpon>PlayersModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Model\equipment.cs">
       <DependentUpon>PlayersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Model\EquipmentModel.cs" />
     <Compile Include="MVVM\Model\player.cs">
       <DependentUpon>PlayersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\Model\PlayerModel.cs" />
     <Compile Include="MVVM\Model\PlayersModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -11,23 +11,24 @@ namespace ProjektSemestralny.MVVM.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class character
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public character()
         {
-            this.characters_equipment = new HashSet<characters_equipment>();
+            this.characters_equipment = new ObservableCollection<characters_equipment>();
         }
-    
+
         public int character_id { get; set; }
         public string character_name { get; set; }
         public Nullable<byte> character_level { get; set; }
         public Nullable<System.DateTime> creation_date { get; set; }
         public int player_id { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<characters_equipment> characters_equipment { get; set; }
+        public virtual ObservableCollection<characters_equipment> characters_equipment { get; set; }
         public virtual player player { get; set; }
     }
 }

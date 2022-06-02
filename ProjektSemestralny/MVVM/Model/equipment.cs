@@ -11,19 +11,20 @@ namespace ProjektSemestralny.MVVM.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class equipment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public equipment()
         {
-            this.characters_equipment = new HashSet<characters_equipment>();
+            this.characters_equipment = new ObservableCollection<characters_equipment>();
         }
     
         public int equipment_id { get; set; }
         public string equipment_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<characters_equipment> characters_equipment { get; set; }
+        public virtual ObservableCollection<characters_equipment> characters_equipment { get; set; }
     }
 }

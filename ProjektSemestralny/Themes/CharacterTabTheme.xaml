@@ -12,25 +12,25 @@
 
                         <StackPanel Orientation="Vertical">
 
-                            <Label Content="{Binding SelectedPlayer.Character1.Name}"
+                            <Label Content="{Binding SelectedPlayer.characters[0].character_name}"
                                    ContentStringFormat="Name: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character1.Level}"
+                            <Label Content="{Binding SelectedPlayer.characters[0].character_level}"
                                    ContentStringFormat="Level: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character1.CreationDate}"
+                            <Label Content="{Binding SelectedPlayer.characters[0].creation_date}"
                                    ContentStringFormat="Created: {0:dd/MM/yyyy}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character1.Id}"
+                            <Label Content="{Binding SelectedPlayer.characters[0].character_id}"
                                    ContentStringFormat="ID: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
@@ -47,7 +47,7 @@
 
 
                             <Grid Height="238">
-                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
+                                <ListView ItemsSource="{Binding SelectedPlayer.characters[0].characters_equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     ItemContainerStyle="{StaticResource EquipmentListItem}"/>
@@ -74,25 +74,25 @@
 
                         <StackPanel Orientation="Vertical">
 
-                            <Label Content="{Binding SelectedPlayer.Character2.Name}"
+                            <Label Content="{Binding SelectedPlayer.characters[1].character_name}"
                                    ContentStringFormat="Name: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character2.Level}"
+                            <Label Content="{Binding SelectedPlayer.characters[1].character_level}"
                                    ContentStringFormat="Level: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character2.CreationDate}"
+                            <Label Content="{Binding SelectedPlayer.characters[1].creation_date}"
                                    ContentStringFormat="Created: {0:dd/MM/yyyy}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character2.Id}"
+                            <Label Content="{Binding SelectedPlayer.characters[1].character_id}"
                                    ContentStringFormat="ID: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
@@ -109,7 +109,7 @@
 
 
                             <Grid Height="238">
-                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
+                                <ListView ItemsSource="{Binding SelectedPlayer.characters[1].characters_equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     ItemContainerStyle="{StaticResource EquipmentListItem}"/>
@@ -136,25 +136,25 @@
                         <StackPanel Orientation="Vertical"
                                     HorizontalAlignment="Stretch">
 
-                            <Label Content="{Binding SelectedPlayer.Character3.Name}"
+                            <Label Content="{Binding SelectedPlayer.characters[2].character_name}"
                                    ContentStringFormat="Name: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character3.Level}"
+                            <Label Content="{Binding SelectedPlayer.characters[2].character_level}"
                                    ContentStringFormat="Level: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character3.CreationDate}"
+                            <Label Content="{Binding SelectedPlayer.characters[2].creation_date}"
                                    ContentStringFormat="Created: {0:dd/MM/yyyy}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
                                    FontSize="16"/>
 
-                            <Label Content="{Binding SelectedPlayer.Character3.Id}"
+                            <Label Content="{Binding SelectedPlayer.characters[2].character_id}"
                                    ContentStringFormat="ID: {0}"
                                    Foreground="White"
                                    VerticalAlignment="Center"
@@ -171,7 +171,7 @@
 
 
                             <Grid Height="238">
-                                <ListView ItemsSource="{Binding SelectedPlayer.Character1.Equipment}"
+                                <ListView ItemsSource="{Binding SelectedPlayer.characters[2].characters_equipment}"
                                     Background="Transparent"
                                     BorderThickness="0"
                                     ItemContainerStyle="{StaticResource EquipmentListItem}"/>
