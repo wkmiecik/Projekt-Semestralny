@@ -18,24 +18,35 @@
                             CornerRadius="4"
                             Margin="8,2,8,2">
 
-                        <StackPanel Orientation="Vertical"
-                                    Margin="5,0,0,0">
-
-                            <Label Content="{Binding player_name}"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"
-                                   FontSize="15"
-                                   Margin="0,2,0,0"/>
-                            
-                            <Label Content="{Binding player_id}"
-                                   ContentStringFormat="ID: {0}"
-                                   Foreground="LightGray"
-                                   VerticalAlignment="Center"
-                                   FontSize="11"
-                                   Margin="0,0,0,2"/>
-
-                        </StackPanel>
                         
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Column="0"
+                                        Margin="5,0,0,0">
+
+                                <Label Content="{Binding player_name}"
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       FontSize="15"
+                                       Margin="0,2,0,0"/>
+
+                                <Label Content="{Binding player_id}"
+                                       ContentStringFormat="ID: {0}"
+                                       Foreground="LightGray"
+                                       VerticalAlignment="Center"
+                                       FontSize="11"
+                                       Margin="0,0,0,2"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

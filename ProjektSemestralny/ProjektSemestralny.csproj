@@ -81,6 +81,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\Dialogs\EditPlayerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\CharacterTabTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +135,9 @@
       <DependentUpon>PlayersModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\View\Dialogs\EditPlayerWindow.xaml.cs">
+      <DependentUpon>EditPlayerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -167,10 +174,10 @@
   <ItemGroup>
     <Resource Include="Images\image.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="MVVM\View\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\remove.png" />
+    <Resource Include="Images\plus.png" />
     <Content Include="MVVM\Model\PlayersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PlayersModel.edmx</DependentUpon>
@@ -181,6 +188,7 @@
       <DependentUpon>PlayersModel.edmx</DependentUpon>
       <LastGenOutput>PlayersModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Images\edit_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

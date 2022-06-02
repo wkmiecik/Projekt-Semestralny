@@ -9,12 +9,15 @@
 
 namespace ProjektSemestralny.MVVM.Model
 {
+    using ProjektSemestralny.Core;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
-    public partial class character
+    public partial class character : ObservableObject
     {
+        private string character_name1;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public character()
         {
@@ -22,7 +25,15 @@ namespace ProjektSemestralny.MVVM.Model
         }
 
         public int character_id { get; set; }
-        public string character_name { get; set; }
+        public string character_name 
+        {
+            get => character_name1;
+            set
+            {
+                character_name1 = value;
+                OnPropertyChanged();
+            }
+        }
         public Nullable<byte> character_level { get; set; }
         public Nullable<System.DateTime> creation_date { get; set; }
         public int player_id { get; set; }
