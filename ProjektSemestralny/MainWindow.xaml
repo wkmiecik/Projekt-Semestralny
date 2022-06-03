@@ -17,6 +17,10 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="visibilityConverter" />
+    </Window.Resources>
+
 
     <Border Background="#36393F"
             BorderThickness="0">
@@ -219,13 +223,14 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Grid.Row="1">
+                            Grid.Row="1"
+                            Visibility="{Binding char0Exists, Converter={StaticResource visibilityConverter}}">
 
                     <Button Grid.Column="1"
                             Width="24" Height="24"
                             Margin="8"
                             BorderThickness="0"
-                            Command="{Binding PlayerEditCommand}">
+                            Command="{Binding Character1EditCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -296,20 +301,19 @@
                             ItemContainerStyle="{StaticResource CharacterTab1}">
                     <ListViewItem/>
                 </ListView>
-                
-                
 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="1"
-                            Grid.Column="1">
+                            Grid.Column="1"
+                            Visibility="{Binding char1Exists, Converter={StaticResource visibilityConverter}}">
 
                     <Button Grid.Column="1"
                             Width="24" Height="24"
                             Margin="8"
                             BorderThickness="0"
-                            Command="{Binding PlayerEditCommand}">
+                            Command="{Binding Character2EditCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -380,20 +384,19 @@
                             ItemContainerStyle="{StaticResource CharacterTab2}">
                     <ListViewItem/>
                 </ListView>
-                
-                
 
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="1"
-                            Grid.Column="2">
+                            Grid.Column="2"
+                            Visibility="{Binding char2Exists, Converter={StaticResource visibilityConverter}}">
 
                     <Button Grid.Column="1"
                             Width="24" Height="24"
                             Margin="8"
                             BorderThickness="0"
-                            Command="{Binding PlayerEditCommand}">
+                            Command="{Binding Character3EditCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>

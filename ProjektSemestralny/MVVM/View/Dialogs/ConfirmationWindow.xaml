@@ -1,0 +1,42 @@
+﻿<Window x:Class="ProjektSemestralny.MVVM.View.Dialogs.ConfirmationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjektSemestralny.MVVM.View.Dialogs"
+        mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        Title="Confirmation"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="#36393F"
+        >
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid Loaded="FrameworkElement_OnLoaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Name="Mask" Background="#36393F" BorderThickness="0"/>
+        <Grid x:Name="Grid" Background="Transparent">
+            <Grid.OpacityMask>
+                <VisualBrush Visual="{Binding ElementName=Mask}"/>
+            </Grid.OpacityMask>
+            <StackPanel Name="StackPanel" >
+                <DockPanel Name="ContentHost" Margin="40,10,40,10" HorizontalAlignment="Center" >
+
+                    <TextBlock Margin="10" 
+                               Name="Textbar" 
+                               Foreground="White"/>
+                </DockPanel>
+                <DockPanel Name="ButtonHost" LastChildFill="False" HorizontalAlignment="Center" >
+                    <Button Name="yesBtn" Margin="10" Click="ButtonBase_OnClick" Width="70">Yes</Button>
+                    <Button Name="noBtn" Margin="10" Click="cancel_Click" Width="70">No</Button>
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
+    

@@ -20,7 +20,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
         public ICommand PlayerEditCommand { get; set; }
         public ICommand PlayerRemoveCommand { get; set; }
         public ICommand PlayerAddCommand { get; set; }
-        
+
         public ICommand Character1EditCommand { get; set; }
         public ICommand Character2EditCommand { get; set; }
         public ICommand Character3EditCommand { get; set; }
@@ -33,9 +33,98 @@ namespace ProjektSemestralny.MVVM.ViewModel
             set
             {
                 _selectedPlayer = value;
+
+                char0Exists = false;
+                char1Exists = false;
+                char2Exists = false;
+
+                if (_selectedPlayer.characters.Count == 1)
+                {
+                    char0Exists = true;
+                }
+                else if (_selectedPlayer.characters.Count == 2)
+                {
+                    char0Exists = true;
+                    char1Exists = true;
+                }
+                else if (_selectedPlayer.characters.Count == 3)
+                {
+                    char0Exists = true;
+                    char1Exists = true;
+                    char2Exists = true;
+                }
+
+                notChar0Exists = !char0Exists;
+                notChar1Exists = !char1Exists;
+                notChar2Exists = !char2Exists;
+
                 OnPropertyChanged();
             }
         }
+
+        private bool _char0Exists = false;
+        private bool _char1Exists = false;
+        private bool _char2Exists = false;
+        private bool _notChar0Exists = true;
+        private bool _notChar1Exists = true;
+        private bool _notChar2Exists = true;
+
+        public bool notChar0Exists 
+        { 
+            get => _notChar0Exists;
+            set 
+            {
+                _notChar0Exists = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool notChar1Exists
+        {
+            get => _notChar1Exists;
+            set
+            {
+                _notChar1Exists = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool notChar2Exists
+        {
+            get => _notChar2Exists;
+            set
+            {
+                _notChar2Exists = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool char0Exists
+        {
+            get => _char0Exists;
+            set
+            {
+                _char0Exists = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool char1Exists
+        {
+            get => _char1Exists;
+            set
+            {
+                _char1Exists = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool char2Exists
+        {
+            get => _char2Exists;
+            set
+            {
+                _char2Exists = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         public MainViewModel()
@@ -47,26 +136,26 @@ namespace ProjektSemestralny.MVVM.ViewModel
             PlayerEditCommand = new RelayCommand(o => PlayerEditClick("MainButton"));
             PlayerRemoveCommand = new RelayCommand(o => PlayerRemoveClick("MainButton"));
             PlayerAddCommand = new RelayCommand(o => PlayerAddClick("MainButton"));
-            
+
             Character1EditCommand = new RelayCommand(o => CharacterEditClick(0));
             Character2EditCommand = new RelayCommand(o => CharacterEditClick(1));
             Character3EditCommand = new RelayCommand(o => CharacterEditClick(2));
         }
 
-        
+
         public void PlayerEditClick(object sender)
         {
             EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
             if (inputDialog.ShowDialog() == true)
             {
                 var tempName = SelectedPlayer.player_name;
-                
+
                 SelectedPlayer.player_name = inputDialog.Answer;
 
                 if (playersDBEntities.players.Any(item => item.player_name == SelectedPlayer.player_name))
                 {
                     SelectedPlayer.player_name = tempName;
-                    MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    new ErrorWindow("Player with this name already exists!").ShowDialog();
                 }
                 else
                 {
@@ -77,7 +166,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                     catch
                     {
                         SelectedPlayer.player_name = tempName;
-                        MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        new ErrorWindow("Database error").ShowDialog();
                     }
                 }
             }
@@ -85,9 +174,9 @@ namespace ProjektSemestralny.MVVM.ViewModel
 
         public void PlayerRemoveClick(object sender)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this player?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var ok = (bool)new ConfirmationWindow("Are you sure you want to delete this player?").ShowDialog();
 
-            if (result == MessageBoxResult.Yes)
+            if (ok)
             {
                 playersDBEntities.players.Remove(SelectedPlayer);
                 try
@@ -98,7 +187,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 }
                 catch
                 {
-                    MessageBox.Show("Database error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    new ErrorWindow("Database error").ShowDialog();
                 }
             }
         }
@@ -115,7 +204,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 if (playersDBEntities.players.Any(item => item.player_name == newPlayer.player_name))
                 {
                     Players.Remove(newPlayer);
-                    MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    new ErrorWindow("Player with this name already exists!").ShowDialog();
                 }
                 else
                 {
@@ -127,7 +216,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                     catch
                     {
                         Players.Remove(newPlayer);
-                        MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        new ErrorWindow("Database error").ShowDialog();
                     }
                 }
             }
@@ -136,31 +225,32 @@ namespace ProjektSemestralny.MVVM.ViewModel
 
         public void CharacterEditClick(int character)
         {
-            EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
-            if (inputDialog.ShowDialog() == true)
-            {
-                var tempName = SelectedPlayer.player_name;
+            new ErrorWindow("Database error").ShowDialog();
+            //EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
+            //if (inputDialog.ShowDialog() == true)
+            //{
+            //    var tempName = SelectedPlayer.player_name;
 
-                SelectedPlayer.player_name = inputDialog.Answer;
+            //    SelectedPlayer.player_name = inputDialog.Answer;
 
-                if (playersDBEntities.players.Any(item => item.player_name == SelectedPlayer.player_name))
-                {
-                    SelectedPlayer.player_name = tempName;
-                    MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    try
-                    {
-                        playersDBEntities.SaveChanges();
-                    }
-                    catch
-                    {
-                        SelectedPlayer.player_name = tempName;
-                        MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-            }
+            //    if (playersDBEntities.players.Any(item => item.player_name == SelectedPlayer.player_name))
+            //    {
+            //        SelectedPlayer.player_name = tempName;
+            //        MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //    else
+            //    {
+            //        try
+            //        {
+            //            playersDBEntities.SaveChanges();
+            //        }
+            //        catch
+            //        {
+            //            SelectedPlayer.player_name = tempName;
+            //            MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        }
+            //    }
+            //}
         }
     }
 }

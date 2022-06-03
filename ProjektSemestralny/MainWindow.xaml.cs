@@ -25,5 +25,10 @@ namespace ProjektSemestralny
         {
             InitializeComponent();
         }
+
+        private void StackPanel_TextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }
