@@ -17,6 +17,10 @@ namespace ProjektSemestralny.MVVM.Model
     public partial class character : ObservableObject
     {
         private string character_name1;
+        private byte? character_level1;
+        private DateTime? creation_date1;
+        private int player_id1;
+        private int character_id1;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public character()
@@ -24,8 +28,16 @@ namespace ProjektSemestralny.MVVM.Model
             this.characters_equipment = new ObservableCollection<characters_equipment>();
         }
 
-        public int character_id { get; set; }
-        public string character_name 
+        public int character_id 
+        { 
+            get => character_id1; 
+            set
+            {
+                character_id1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public string character_name
         {
             get => character_name1;
             set
@@ -34,9 +46,33 @@ namespace ProjektSemestralny.MVVM.Model
                 OnPropertyChanged();
             }
         }
-        public Nullable<byte> character_level { get; set; }
-        public Nullable<System.DateTime> creation_date { get; set; }
-        public int player_id { get; set; }
+        public Nullable<byte> character_level
+        {
+            get => character_level1;
+            set
+            {
+                character_level1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public Nullable<System.DateTime> creation_date
+        {
+            get => creation_date1;
+            set
+            {
+                creation_date1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public int player_id
+        {
+            get => player_id1;
+            set
+            {
+                player_id1 = value;
+                OnPropertyChanged();
+            }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<characters_equipment> characters_equipment { get; set; }

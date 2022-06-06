@@ -21,12 +21,19 @@ namespace ProjektSemestralny.MVVM.ViewModel
         public ICommand PlayerRemoveCommand { get; set; }
         public ICommand PlayerAddCommand { get; set; }
 
+        public ICommand Character0EditCommand { get; set; }
         public ICommand Character1EditCommand { get; set; }
         public ICommand Character2EditCommand { get; set; }
-        public ICommand Character3EditCommand { get; set; }
+        public ICommand CharacterAddCommand { get; set; }
+        public ICommand Character0RemoveCommand { get; set; }
+        public ICommand Character1RemoveCommand { get; set; }
+        public ICommand Character2RemoveCommand { get; set; }
 
 
         private player _selectedPlayer { get; set; }
+        private characters_equipment selectedEquipment0;
+        private characters_equipment selectedEquipment1;
+        private characters_equipment selectedEquipment2;
         public player SelectedPlayer
         {
             get => _selectedPlayer;
@@ -62,6 +69,35 @@ namespace ProjektSemestralny.MVVM.ViewModel
             }
         }
 
+        public characters_equipment SelectedEquipment0
+        {
+            get => selectedEquipment0;
+            set 
+            {
+                selectedEquipment0 = value;
+                OnPropertyChanged();
+            }
+        }
+        public characters_equipment SelectedEquipment1
+        {
+            get => selectedEquipment1;
+            set
+            {
+                selectedEquipment1 = value;
+                OnPropertyChanged();
+            }
+        }
+        public characters_equipment SelectedEquipment2
+        {
+            get => selectedEquipment2;
+            set
+            {
+                selectedEquipment2 = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private bool _char0Exists = false;
         private bool _char1Exists = false;
         private bool _char2Exists = false;
@@ -69,10 +105,10 @@ namespace ProjektSemestralny.MVVM.ViewModel
         private bool _notChar1Exists = true;
         private bool _notChar2Exists = true;
 
-        public bool notChar0Exists 
-        { 
+        public bool notChar0Exists
+        {
             get => _notChar0Exists;
-            set 
+            set
             {
                 _notChar0Exists = value;
                 OnPropertyChanged();
@@ -96,7 +132,6 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public bool char0Exists
         {
             get => _char0Exists;
@@ -133,17 +168,21 @@ namespace ProjektSemestralny.MVVM.ViewModel
             Players = new ObservableCollection<player>(playersDBEntities.players.OrderBy(item => item.player_id));
             SelectedPlayer = Players[0];
 
-            PlayerEditCommand = new RelayCommand(o => PlayerEditClick("MainButton"));
-            PlayerRemoveCommand = new RelayCommand(o => PlayerRemoveClick("MainButton"));
-            PlayerAddCommand = new RelayCommand(o => PlayerAddClick("MainButton"));
+            PlayerEditCommand = new RelayCommand(o => PlayerEditClick());
+            PlayerRemoveCommand = new RelayCommand(o => PlayerRemoveClick());
+            PlayerAddCommand = new RelayCommand(o => PlayerAddClick());
 
-            Character1EditCommand = new RelayCommand(o => CharacterEditClick(0));
-            Character2EditCommand = new RelayCommand(o => CharacterEditClick(1));
-            Character3EditCommand = new RelayCommand(o => CharacterEditClick(2));
+            Character0EditCommand = new RelayCommand(o => CharacterEditClick(0));
+            Character1EditCommand = new RelayCommand(o => CharacterEditClick(1));
+            Character2EditCommand = new RelayCommand(o => CharacterEditClick(2));
+            CharacterAddCommand = new RelayCommand(o => CharacterAddClick());
+            Character0RemoveCommand = new RelayCommand(o => CharacterRemoveClick(0));
+            Character1RemoveCommand = new RelayCommand(o => CharacterRemoveClick(1));
+            Character2RemoveCommand = new RelayCommand(o => CharacterRemoveClick(2));
         }
 
 
-        public void PlayerEditClick(object sender)
+        public void PlayerEditClick()
         {
             EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
             if (inputDialog.ShowDialog() == true)
@@ -172,7 +211,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
             }
         }
 
-        public void PlayerRemoveClick(object sender)
+        public void PlayerRemoveClick()
         {
             var ok = (bool)new ConfirmationWindow("Are you sure you want to delete this player?").ShowDialog();
 
@@ -192,7 +231,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
             }
         }
 
-        public void PlayerAddClick(object sender)
+        public void PlayerAddClick()
         {
             EditPlayerWindow inputDialog = new EditPlayerWindow("New player's name:", iconSource: "/Images/plus.png");
             if (inputDialog.ShowDialog() == true)
@@ -225,32 +264,91 @@ namespace ProjektSemestralny.MVVM.ViewModel
 
         public void CharacterEditClick(int character)
         {
-            new ErrorWindow("Database error").ShowDialog();
-            //EditPlayerWindow inputDialog = new EditPlayerWindow("Change player name:", SelectedPlayer.player_name);
-            //if (inputDialog.ShowDialog() == true)
-            //{
-            //    var tempName = SelectedPlayer.player_name;
+            EditCharacterWindow inputDialog = new EditCharacterWindow(SelectedPlayer.characters[character].character_name, SelectedPlayer.characters[character].character_level.ToString());
+            if (inputDialog.ShowDialog() == true)
+            {
+                var tempName = SelectedPlayer.characters[character].character_name;
+                var tempLevel = SelectedPlayer.characters[character].character_level;
 
-            //    SelectedPlayer.player_name = inputDialog.Answer;
+                SelectedPlayer.characters[character].character_name = inputDialog.NameAnswer;
 
-            //    if (playersDBEntities.players.Any(item => item.player_name == SelectedPlayer.player_name))
-            //    {
-            //        SelectedPlayer.player_name = tempName;
-            //        MessageBox.Show("Player with this name already exists!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //    else
-            //    {
-            //        try
-            //        {
-            //            playersDBEntities.SaveChanges();
-            //        }
-            //        catch
-            //        {
-            //            SelectedPlayer.player_name = tempName;
-            //            MessageBox.Show("Wrong name given", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //        }
-            //    }
-            //}
+                try
+                {
+                    var level = byte.Parse(inputDialog.LevelAnswer);
+                    if (level < 1 || level > 100) throw new Exception();
+                    SelectedPlayer.characters[character].character_level = level;
+                }
+                catch
+                {
+                    SelectedPlayer.characters[character].character_name = tempName;
+                    SelectedPlayer.characters[character].character_level = tempLevel;
+                    new ErrorWindow("Invalid character level").ShowDialog();
+                    return;
+                }
+
+                try
+                {
+                    playersDBEntities.SaveChanges();
+                }
+                catch
+                {
+                    SelectedPlayer.characters[character].character_name = tempName;
+                    SelectedPlayer.characters[character].character_level = tempLevel;
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
+        }
+
+        public void CharacterAddClick()
+        {
+            EditCharacterWindow inputDialog = new EditCharacterWindow();
+            if (inputDialog.ShowDialog() == true)
+            {
+                character newCharacter;
+
+                try
+                {
+                    var level = byte.Parse(inputDialog.LevelAnswer);
+                    if (level < 1 || level > 100) throw new Exception();
+                    newCharacter = new character { character_name = inputDialog.NameAnswer, character_level = level, creation_date = DateTime.Now };
+                    SelectedPlayer.characters.Add(newCharacter);
+                    SelectedPlayer = SelectedPlayer;
+                }
+                catch
+                {
+                    new ErrorWindow("Invalid character level").ShowDialog();
+                    return;
+                }
+
+                try
+                {
+                    playersDBEntities.SaveChanges();
+                }
+                catch
+                {
+                    SelectedPlayer.characters.Remove(newCharacter);
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
+        }
+
+        public void CharacterRemoveClick(int character)
+        {
+            var ok = (bool)new ConfirmationWindow("Are you sure you want to delete this character?").ShowDialog();
+
+            if (ok)
+            {
+                playersDBEntities.characters.Remove(SelectedPlayer.characters[character]);
+                try
+                {
+                    playersDBEntities.SaveChanges();
+                    SelectedPlayer = SelectedPlayer;
+                }
+                catch
+                {
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
         }
     }
 }

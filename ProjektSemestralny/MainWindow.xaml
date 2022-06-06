@@ -99,7 +99,8 @@
                             </Style>
                         </Button.Style>
 
-                        <Image Source="/Images/plus.png"/>
+                        <Image Source="/Images/plus.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </Border>
 
@@ -153,7 +154,8 @@
                                 </Style>
                             </Button.Style>
 
-                            <Image Source="/Images/edit_icon.png"/>
+                            <Image Source="/Images/edit_icon.png"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
 
                         <Button Grid.Column="1"
@@ -187,7 +189,8 @@
                                 </Style>
                             </Button.Style>
 
-                            <Image Source="/Images/remove.png"/>
+                            <Image Source="/Images/remove.png"
+                                   RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Button>
                     </StackPanel>
 
@@ -230,6 +233,91 @@
                             Width="24" Height="24"
                             Margin="8"
                             BorderThickness="0"
+                            Command="{Binding Character0EditCommand}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Image Source="/Images/edit_icon.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+
+                    <Button Grid.Column="1"
+                                Width="24" Height="24"
+                                Margin="8"
+                                BorderThickness="0"
+                                Command="{Binding Character0RemoveCommand}">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#3F000000"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Image Source="/Images/remove.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Button>
+                </StackPanel>
+
+                <ListView Grid.Row="2" Grid.Column="0"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            ItemContainerStyle="{StaticResource CharacterTab1}">
+                    <ListViewItem/>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Visibility="{Binding char1Exists, Converter={StaticResource visibilityConverter}}">
+
+                    <Button Grid.Column="1"
+                            Width="24" Height="24"
+                            Margin="8"
+                            BorderThickness="0"
                             Command="{Binding Character1EditCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
@@ -257,14 +345,15 @@
                             </Style>
                         </Button.Style>
 
-                        <Image Source="/Images/edit_icon.png"/>
+                        <Image Source="/Images/edit_icon.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
 
                     <Button Grid.Column="1"
                                 Width="24" Height="24"
                                 Margin="8"
                                 BorderThickness="0"
-                                Command="{Binding PlayerRemoveCommand}">
+                                Command="{Binding Character1RemoveCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -291,14 +380,15 @@
                             </Style>
                         </Button.Style>
 
-                        <Image Source="/Images/remove.png"/>
+                        <Image Source="/Images/remove.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>
 
-                <ListView Grid.Row="2" Grid.Column="0"
+                <ListView Grid.Row="2" Grid.Column="1"
                             BorderThickness="0"
                             Background="Transparent"
-                            ItemContainerStyle="{StaticResource CharacterTab1}">
+                            ItemContainerStyle="{StaticResource CharacterTab2}">
                     <ListViewItem/>
                 </ListView>
 
@@ -306,8 +396,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="1"
-                            Grid.Column="1"
-                            Visibility="{Binding char1Exists, Converter={StaticResource visibilityConverter}}">
+                            Grid.Column="2"
+                            Visibility="{Binding char2Exists, Converter={StaticResource visibilityConverter}}">
 
                     <Button Grid.Column="1"
                             Width="24" Height="24"
@@ -340,14 +430,15 @@
                             </Style>
                         </Button.Style>
 
-                        <Image Source="/Images/edit_icon.png"/>
+                        <Image Source="/Images/edit_icon.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
 
                     <Button Grid.Column="1"
                                 Width="24" Height="24"
                                 Margin="8"
                                 BorderThickness="0"
-                                Command="{Binding PlayerRemoveCommand}">
+                                Command="{Binding Character2RemoveCommand}">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -374,90 +465,8 @@
                             </Style>
                         </Button.Style>
 
-                        <Image Source="/Images/remove.png"/>
-                    </Button>
-                </StackPanel>
-
-                <ListView Grid.Row="2" Grid.Column="1"
-                            BorderThickness="0"
-                            Background="Transparent"
-                            ItemContainerStyle="{StaticResource CharacterTab2}">
-                    <ListViewItem/>
-                </ListView>
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Grid.Row="1"
-                            Grid.Column="2"
-                            Visibility="{Binding char2Exists, Converter={StaticResource visibilityConverter}}">
-
-                    <Button Grid.Column="1"
-                            Width="24" Height="24"
-                            Margin="8"
-                            BorderThickness="0"
-                            Command="{Binding Character3EditCommand}">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#3F000000"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Image Source="/Images/edit_icon.png"/>
-                    </Button>
-
-                    <Button Grid.Column="1"
-                                Width="24" Height="24"
-                                Margin="8"
-                                BorderThickness="0"
-                                Command="{Binding PlayerRemoveCommand}">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#3F000000"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-
-                        <Image Source="/Images/remove.png"/>
+                        <Image Source="/Images/remove.png"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
                     </Button>
                 </StackPanel>
 

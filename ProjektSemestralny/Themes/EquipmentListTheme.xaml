@@ -16,7 +16,7 @@
                     <Border Background="{TemplateBinding Background}"
                             Height="35"
                             CornerRadius="4"
-                            Margin="8,2,8,2">
+                            Margin="4,2,4,2">
 
                         <StackPanel Orientation="Horizontal"
                                     Margin="5,0,0,0"

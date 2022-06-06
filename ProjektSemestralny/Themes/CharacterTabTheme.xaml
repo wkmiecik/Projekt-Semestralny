@@ -14,7 +14,8 @@
                             CornerRadius="4"
                             Margin="5">
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Margin="10">
 
                             <Label Content="{Binding SelectedPlayer.characters[0].character_name}"
                                    ContentStringFormat="Name: {0}"
@@ -44,24 +45,25 @@
                                     BorderThickness="0,3,0,0"
                                     Visibility="{Binding char0Exists, Converter={StaticResource visibilityConverter}}">
                                 <Label Content="Equipment"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   FontSize="21"/>
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="21"
+                                       Margin="0,5,0,0"/>
                             </Border>
 
 
-                            <Button Width="30" Height="30"
-                                    Margin="0,130,0,0"
+                            <Button Width="50" Height="50"
+                                    Margin="0,115,0,0"
                                     BorderThickness="0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Command="{Binding PlayerAddCommand}"
+                                    Command="{Binding CharacterAddCommand}"
                                     Visibility="{Binding notChar0Exists, Converter={StaticResource visibilityConverter}}">
 
                                 <Button.Resources>
                                     <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="15"/>
+                                        <Setter Property="CornerRadius" Value="25"/>
                                     </Style>
                                 </Button.Resources>
 
@@ -85,21 +87,59 @@
                                     </Style>
                                 </Button.Style>
 
-                                <Image Source="/Images/plus.png"/>
+                                <Image Source="/Images/plus.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
                             </Button>
 
 
-                            <Grid Height="238">
+                            <Grid Height="160">
                                 <ListView ItemsSource="{Binding SelectedPlayer.characters[0].characters_equipment}"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                                          SelectedItem="{Binding SelectedEquipment0}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          ItemContainerStyle="{StaticResource EquipmentListItem}"/>
                             </Grid>
 
+                            <Button Width="17" Height="17"
+                                    Margin="0,2,0,0"
+                                    BorderThickness="0"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Command="{Binding CharacterAddCommand}"
+                                    Visibility="{Binding notChar1Exists, Converter={StaticResource visibilityConverter}}">
+
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="17"/>
+                                    </Style>
+                                </Button.Resources>
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#3F000000"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+
+                                <Image Source="/Images/plus.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </Button>
+
+
                         </StackPanel>
-                        
-                        
-                        
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -116,7 +156,8 @@
                             CornerRadius="4"
                             Margin="5">
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Margin="10">
 
                             <Label Content="{Binding SelectedPlayer.characters[1].character_name}"
                                    ContentStringFormat="Name: {0}"
@@ -146,24 +187,25 @@
                                     BorderThickness="0,3,0,0"
                                     Visibility="{Binding char1Exists, Converter={StaticResource visibilityConverter}}">
                                 <Label Content="Equipment"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   FontSize="21"/>
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="21"
+                                       Margin="0,10,0,0"/>
                             </Border>
 
 
-                            <Button Width="30" Height="30"
-                                    Margin="0,130,0,0"
+                            <Button Width="50" Height="50"
+                                    Margin="0,115,0,0"
                                     BorderThickness="0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Command="{Binding PlayerAddCommand}"
+                                    Command="{Binding CharacterAddCommand}"
                                     Visibility="{Binding notChar1Exists, Converter={StaticResource visibilityConverter}}">
 
                                 <Button.Resources>
                                     <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="15"/>
+                                        <Setter Property="CornerRadius" Value="25"/>
                                     </Style>
                                 </Button.Resources>
 
@@ -187,16 +229,18 @@
                                     </Style>
                                 </Button.Style>
 
-                                <Image Source="/Images/plus.png"/>
+                                <Image Source="/Images/plus.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
                             </Button>
 
 
 
-                            <Grid Height="238">
+                            <Grid Height="160">
                                 <ListView ItemsSource="{Binding SelectedPlayer.characters[1].characters_equipment}"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                                          SelectedItem="{Binding SelectedEquipment1}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          ItemContainerStyle="{StaticResource EquipmentListItem}"/>
                             </Grid>
 
 
@@ -217,7 +261,8 @@
                             CornerRadius="4"
                             Margin="5">
 
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Margin="10">
 
                             <Label Content="{Binding SelectedPlayer.characters[2].character_name}"
                                    ContentStringFormat="Name: {0}"
@@ -247,24 +292,25 @@
                                     BorderThickness="0,3,0,0"
                                     Visibility="{Binding char2Exists, Converter={StaticResource visibilityConverter}}">
                                 <Label Content="Equipment"
-                                   Foreground="White"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   FontSize="21"/>
+                                       Foreground="White"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="21"
+                                       Margin="0,10,0,0"/>
                             </Border>
 
 
-                            <Button Width="30" Height="30"
-                                    Margin="0,130,0,0"
+                            <Button Width="50" Height="50"
+                                    Margin="0,115,0,0"
                                     BorderThickness="0"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
-                                    Command="{Binding PlayerAddCommand}"
+                                    Command="{Binding CharacterAddCommand}"
                                     Visibility="{Binding notChar2Exists, Converter={StaticResource visibilityConverter}}">
 
                                 <Button.Resources>
                                     <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="15"/>
+                                        <Setter Property="CornerRadius" Value="25"/>
                                     </Style>
                                 </Button.Resources>
 
@@ -288,16 +334,18 @@
                                     </Style>
                                 </Button.Style>
 
-                                <Image Source="/Images/plus.png"/>
+                                <Image Source="/Images/plus.png"
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
                             </Button>
 
 
 
-                            <Grid Height="238">
+                            <Grid Height="160">
                                 <ListView ItemsSource="{Binding SelectedPlayer.characters[2].characters_equipment}"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    ItemContainerStyle="{StaticResource EquipmentListItem}"/>
+                                          SelectedItem="{Binding SelectedEquipment2}"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          ItemContainerStyle="{StaticResource EquipmentListItem}"/>
                             </Grid>
 
 
