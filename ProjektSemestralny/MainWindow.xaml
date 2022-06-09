@@ -46,20 +46,13 @@
                     <RowDefinition />
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
-                
-                <TextBox Width="230"
-                         Height="40"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Center"
-                         Margin="5"
-                         Grid.Column="0"
-                         Style="{StaticResource SearchBoxTheme}"/>
 
                 <ListView ItemsSource="{Binding Players}"
                           SelectedItem="{Binding SelectedPlayer}"
                           Background="Transparent"
                           BorderThickness="0"
-                          Grid.Row="1"
+                          Grid.Row="0"
+                          Grid.RowSpan="2"
                           ItemContainerStyle="{StaticResource PlayerListItem}" d:ItemsSource="{d:SampleData ItemCount=5}"/>
 
                 <Border BorderThickness="0,2,0,0"
