@@ -455,6 +455,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 {
                     playersDBEntities.characters_equipment.Add(newEquipment);
                     playersDBEntities.SaveChanges();
+                    SelectedPlayer = SelectedPlayer;
                 }
                 catch
                 {
@@ -492,6 +493,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 try
                 {
                     playersDBEntities.SaveChanges();
+                    SelectedPlayer = SelectedPlayer;
                 }
                 catch
                 {
