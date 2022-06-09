@@ -9,15 +9,26 @@
 
 namespace ProjektSemestralny.MVVM.Model
 {
+    using ProjektSemestralny.Core;
     using System;
     using System.Collections.Generic;
-    
-    public partial class characters_equipment
+
+    public partial class characters_equipment : ObservableObject
     {
+        private int? quantity1;
+
         public int character_id { get; set; }
         public int equipment_id { get; set; }
-        public Nullable<int> quantity { get; set; }
-    
+        public Nullable<int> quantity 
+        { 
+            get => quantity1;
+            set 
+            { 
+                quantity1 = value;
+                OnPropertyChanged();
+            }
+        }
+
         public virtual character character { get; set; }
         public virtual equipment equipment { get; set; }
     }

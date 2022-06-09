@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace ProjektSemestralny.MVVM.View.Dialogs
 {
     /// <summary>
-    /// Interaction logic for EditPlayerWindow.xaml
+    /// Interaction logic for EditCharacterWindow.xaml
     /// </summary>
     public partial class EditCharacterWindow : Window
     {

@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Themes/EquipmentListTheme.xaml"/>
                 <ResourceDictionary Source="Themes/CharacterTabTheme.xaml"/>
                 <ResourceDictionary Source="Themes/ScrollbarTheme.xaml"/>
+                <ResourceDictionary Source="Themes/EquipmentComboBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
         </ResourceDictionary>

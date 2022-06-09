@@ -81,6 +81,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\Dialogs\EditEquipmentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MVVM\View\Dialogs\EditCharacterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,6 +104,10 @@
     <Page Include="Themes\CharacterTabTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\EquipmentComboBoxTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\EquipmentListTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +155,10 @@
       <DependentUpon>PlayersModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\View\Converters\EmptyListVisibilityConverter.cs" />
+    <Compile Include="MVVM\View\Dialogs\EditEquipmentWindow.xaml.cs">
+      <DependentUpon>EditEquipmentWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\Dialogs\EditCharacterWindow.xaml.cs">
       <DependentUpon>EditCharacterWindow.xaml</DependentUpon>
     </Compile>

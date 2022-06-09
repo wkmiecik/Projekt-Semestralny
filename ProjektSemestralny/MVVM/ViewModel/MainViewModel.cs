@@ -16,7 +16,8 @@ namespace ProjektSemestralny.MVVM.ViewModel
     {
         private PlayersDBEntities playersDBEntities;
         public ObservableCollection<player> Players { get; set; }
-
+        public ObservableCollection<equipment> Equipment { get; set; }
+        
         public ICommand PlayerEditCommand { get; set; }
         public ICommand PlayerRemoveCommand { get; set; }
         public ICommand PlayerAddCommand { get; set; }
@@ -28,6 +29,10 @@ namespace ProjektSemestralny.MVVM.ViewModel
         public ICommand Character0RemoveCommand { get; set; }
         public ICommand Character1RemoveCommand { get; set; }
         public ICommand Character2RemoveCommand { get; set; }
+
+        public ICommand EquipmentAddCommand { get; set; }
+        public ICommand EquipmentEditCommand { get; set; }
+        public ICommand EquipmentRemoveCommand { get; set; }
 
 
         private player _selectedPlayer { get; set; }
@@ -65,6 +70,13 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 notChar1Exists = !char1Exists;
                 notChar2Exists = !char2Exists;
 
+                if (char0Exists && value.characters[0].characters_equipment.Count > 0)
+                    SelectedEquipment0 = value.characters[0].characters_equipment[0];
+                if (char1Exists && value.characters[1].characters_equipment.Count > 0)
+                    SelectedEquipment1 = value.characters[1].characters_equipment[0];
+                if (char2Exists && value.characters[2].characters_equipment.Count > 0)
+                    SelectedEquipment2 = value.characters[2].characters_equipment[0];
+
                 OnPropertyChanged();
             }
         }
@@ -72,7 +84,7 @@ namespace ProjektSemestralny.MVVM.ViewModel
         public characters_equipment SelectedEquipment0
         {
             get => selectedEquipment0;
-            set 
+            set
             {
                 selectedEquipment0 = value;
                 OnPropertyChanged();
@@ -166,6 +178,8 @@ namespace ProjektSemestralny.MVVM.ViewModel
         {
             playersDBEntities = new PlayersDBEntities();
             Players = new ObservableCollection<player>(playersDBEntities.players.OrderBy(item => item.player_id));
+            Equipment = new ObservableCollection<equipment>(playersDBEntities.equipments.OrderBy(item => item.equipment_id));
+
             SelectedPlayer = Players[0];
 
             PlayerEditCommand = new RelayCommand(o => PlayerEditClick());
@@ -179,6 +193,10 @@ namespace ProjektSemestralny.MVVM.ViewModel
             Character0RemoveCommand = new RelayCommand(o => CharacterRemoveClick(0));
             Character1RemoveCommand = new RelayCommand(o => CharacterRemoveClick(1));
             Character2RemoveCommand = new RelayCommand(o => CharacterRemoveClick(2));
+
+            EquipmentAddCommand = new RelayCommand(o => EquipmentAddClick(o));
+            EquipmentEditCommand = new RelayCommand(o => EquipmentEditClick(o));
+            EquipmentRemoveCommand = new RelayCommand(o => EquipmentRemoveClick(o));
         }
 
 
@@ -346,6 +364,138 @@ namespace ProjektSemestralny.MVVM.ViewModel
                 }
                 catch
                 {
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
+        }
+        
+
+        public void EquipmentEditClick(object sender)
+        {
+            var character = int.Parse(sender.ToString());
+
+            characters_equipment slecetedEq = null;
+
+            switch (character)
+            {
+                case 0:
+                    slecetedEq = SelectedEquipment0;
+                    break;
+                case 1:
+                    slecetedEq = SelectedEquipment1;
+                    break;
+                case 2:
+                    slecetedEq = SelectedEquipment2;
+                    break;
+            }
+
+            var inputDialog = new EditEquipmentWindow(Equipment, slecetedEq.equipment, false, (int)slecetedEq.quantity);
+
+            if (inputDialog.ShowDialog() == true)
+            {
+                var tempQuantity = slecetedEq.quantity;
+                var quantity = inputDialog.QuantityAnswer;
+
+                if (quantity < 1)
+                {
+                    new ErrorWindow("Invalid quantity").ShowDialog();
+                    return;
+                }
+
+                slecetedEq.quantity = quantity;
+
+                try
+                {
+                    playersDBEntities.SaveChanges();
+                }
+                catch
+                {
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
+        }
+
+        public void EquipmentAddClick(object sender)
+        {
+            var character = int.Parse(sender.ToString());
+
+            var types = new List<equipment>();
+
+            foreach (var item in SelectedPlayer.characters[character].characters_equipment)
+            {
+                types.Add(item.equipment);
+            }
+            
+            var avaiable = Equipment.Except(types);
+            ObservableCollection<equipment> avaiableEquipment = new ObservableCollection<equipment>(avaiable);
+
+            if (avaiableEquipment.Count == 0)
+            {
+                new ErrorWindow("No available equipment").ShowDialog();
+                return;
+            }
+
+            var inputDialog = new EditEquipmentWindow(avaiableEquipment, avaiableEquipment[0], true, 1);
+            inputDialog.Title = "Add equipment";
+
+            if (inputDialog.ShowDialog() == true)
+            {
+                var equipment = inputDialog.EquipmentAnswer;
+                var quantity = inputDialog.QuantityAnswer;
+                
+                if (quantity < 1)
+                {
+                    new ErrorWindow("Invalid quantity").ShowDialog();
+                    return;
+                }
+
+                characters_equipment newEquipment = new characters_equipment { equipment = equipment, quantity = quantity, character = SelectedPlayer.characters[character] };
+
+                try
+                {
+                    playersDBEntities.characters_equipment.Add(newEquipment);
+                    playersDBEntities.SaveChanges();
+                }
+                catch
+                {
+                    playersDBEntities.characters_equipment.Remove(newEquipment);
+                    new ErrorWindow("Database error").ShowDialog();
+                }
+            }
+        }
+
+        public void EquipmentRemoveClick(object sender)
+        {
+            var ok = (bool)new ConfirmationWindow("Are you sure you want to delete this equipment?").ShowDialog();
+
+            if (ok)
+            {
+                var character = int.Parse(sender.ToString());
+
+                characters_equipment slecetedEq = null;
+
+                switch (character)
+                {
+                    case 0:
+                        slecetedEq = SelectedEquipment0;
+                        break;
+                    case 1:
+                        slecetedEq = SelectedEquipment1;
+                        break;
+                    case 2:
+                        slecetedEq = SelectedEquipment2;
+                        break;
+                }
+
+                playersDBEntities.characters_equipment.Remove(slecetedEq);
+
+                try
+                {
+                    playersDBEntities.SaveChanges();
+                }
+                catch
+                {
+                    playersDBEntities.characters_equipment.Add(slecetedEq);
                     new ErrorWindow("Database error").ShowDialog();
                 }
             }
